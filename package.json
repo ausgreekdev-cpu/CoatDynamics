@@ -1,0 +1,12 @@
+{
+  "name": "painter-saas",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@12.14.0",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint"
+  },
+  "workspaces": ["apps/*", "packages/*"]
+}
