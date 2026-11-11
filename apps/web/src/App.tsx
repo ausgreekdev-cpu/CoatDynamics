@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { supabase } from './lib/supabase'
+import Login from './pages/Login'
 import SuperAdmin from './pages/SuperAdmin'
 import Onboarding from './pages/Onboarding'
 import Crm from './pages/Crm'
@@ -10,20 +12,34 @@ import PublicHub from './pages/PublicHub'
 import './App.css'
 
 function App() {
-  const [view, setView] = useState<'admin' | 'onboard' | 'crm' | 'ops' | 'inv' | 'comp' | 'fin' | 'hub'>('admin');
+  const [session, setSession] = useState<any>(null);
+  const [view, setView] = useState('admin');
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setSession(data.session));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
+    return () => sub.subscription.unsubscribe();
+  }, []);
+  if (!session) return <Login />;
+  const tabs = [
+    ['admin','Super-Admin'],['onboard','Onboarding'],['crm','CRM'],['ops','Operations'],
+    ['inv','Inventory'],['comp','Compliance'],['fin','Financials'],['hub','Public Hub'],
+  ];
   return (
     <div>
-      <nav className="flex gap-4 p-4 border-b">
-        <button onClick={() => setView('admin')} className="text-blue-600">Super-Admin</button>
-        <button onClick={() => setView('onboard')} className="text-blue-600">Onboarding</button>
-        <button onClick={() => setView('crm')} className="text-blue-600">CRM</button>
-        <button onClick={() => setView('ops')} className="text-blue-600">Operations</button>
-        <button onClick={() => setView('inv')} className="text-blue-600">Inventory</button>
-        <button onClick={() => setView('comp')} className="text-blue-600">Compliance</button>
-        <button onClick={() => setView('fin')} className="text-blue-600">Financials</button>
-        <button onClick={() => setView('hub')} className="text-blue-600">Public Hub</button>
+      <nav className="flex gap-2 p-4 border-b flex-wrap items-center">
+        {tabs.map(([k,l]) => (
+          <button key={k} onClick={() => setView(k)} className={`px-3 py-1 rounded border ${view===k?'bg-blue-600 text-white':'bg-white'}`}>{l}</button>
+        ))}
+        <button onClick={() => supabase.auth.signOut()} className="ml-auto text-red-600">Sign out</button>
       </nav>
-      {view === 'admin' ? <SuperAdmin /> : view === 'onboard' ? <Onboarding /> : view === 'crm' ? <Crm /> : view === 'ops' ? <Operations /> : view === 'inv' ? <Inventory /> : view === 'comp' ? <Compliance /> : view === 'fin' ? <Financials /> : <PublicHub />}
+      {view==='admin'&&<SuperAdmin/>}
+      {view==='onboard'&&<Onboarding/>}
+      {view==='crm'&&<Crm/>}
+      {view==='ops'&&<Operations/>}
+      {view==='inv'&&<Inventory/>}
+      {view==='comp'&&<Compliance/>}
+      {view==='fin'&&<Financials/>}
+      {view==='hub'&&<PublicHub/>}
     </div>
   );
 }
