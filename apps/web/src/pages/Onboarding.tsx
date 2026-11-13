@@ -7,10 +7,12 @@ export default function Onboarding() {
   const [msg, setMsg] = useState('');
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const { data: existing } = await supabase.from('tenants').select('id').eq('slug', slug).maybeSingle();
+    if (existing) { setMsg('Slug already taken'); return; }
     const { data: t, error } = await supabase.from('tenants').insert({ name, slug }).select().single();
     if (error) { setMsg(error.message); return; }
     const { data: u } = await supabase.auth.getUser();
-    if (u.user) await supabase.from('profiles').insert({ id: u.user.id, tenant_id: t.id, role: 'tenant_owner', full_name: name });
+    if (u.user) await supabase.from('profiles').upsert({ id: u.user.id, tenant_id: t.id, role: 'tenant_owner', full_name: name });
     setMsg('Tenant created: ' + t.id);
   };
   return (

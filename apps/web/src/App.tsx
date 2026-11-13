@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { supabase } from './lib/supabase'
+import { useAuth } from './auth/AuthProvider'
 import Login from './pages/Login'
 import SuperAdmin from './pages/SuperAdmin'
 import Onboarding from './pages/Onboarding'
@@ -12,13 +13,9 @@ import PublicHub from './pages/PublicHub'
 import './App.css'
 
 function App() {
-  const [session, setSession] = useState<any>(null);
+  const { session, loading } = useAuth();
   const [view, setView] = useState('admin');
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => setSession(data.session));
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
-    return () => sub.subscription.unsubscribe();
-  }, []);
+  if (loading) return <div className="p-6">Loading...</div>;
   if (!session) return <Login />;
   const tabs = [
     ['admin','Super-Admin'],['onboard','Onboarding'],['crm','CRM'],['ops','Operations'],
