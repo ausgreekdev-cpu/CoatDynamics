@@ -10,6 +10,7 @@ import Inventory from './pages/Inventory'
 import Compliance from './pages/Compliance'
 import Financials from './pages/Financials'
 import PublicHub from './pages/PublicHub'
+import SurfaceEstimator from './pages/SurfaceEstimator'
 import './App.css'
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
   if (!session) return <Login />;
   const tabs = [
     ['admin','Super-Admin'],['onboard','Onboarding'],['crm','CRM'],['ops','Operations'],
-    ['inv','Inventory'],['comp','Compliance'],['fin','Financials'],['hub','Public Hub'],
+    ['inv','Inventory'],['comp','Compliance'],['fin','Financials'],['hub','Public Hub'],['est','Estimator'],
   ];
   return (
     <div>
@@ -37,6 +38,7 @@ function App() {
       {view==='comp'&&<Compliance/>}
       {view==='fin'&&<Financials/>}
       {view==='hub'&&<PublicHub/>}
+      {view==='est'&&<SurfaceEstimator/>}
     </div>
   );
 }
