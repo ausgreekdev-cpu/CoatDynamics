@@ -1,18 +1,22 @@
 import { useState } from 'react';
-const TYPES = ['Clients','Builders','Employees','Subcontractors','Accountants','Suppliers'];
+import { useClients } from '../hooks/useClients';
+
 export default function Crm() {
-  const [tab, setTab] = useState(TYPES[0]);
+  const { clients, loading, add } = useClients();
+  const [name, setName] = useState('');
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">CRM & Stakeholders</h1>
-      <div className="flex gap-2 flex-wrap mb-4">
-        {TYPES.map(t => (
-          <button key={t} onClick={() => setTab(t)}
-            className={`px-3 py-1 rounded border ${tab===t?'bg-blue-600 text-white':'bg-white'}`}>{t}</button>
-        ))}
-      </div>
-      <p className="text-gray-600">Managing: {tab}</p>
-      <div className="mt-4 p-4 border rounded">No records yet.</div>
+      <h1 className="text-2xl font-bold mb-4">CRM — Clients</h1>
+      <form onSubmit={e => { e.preventDefault(); add(name); setName(''); }} className="flex gap-2 mb-4">
+        <input className="border p-2 rounded flex-1" placeholder="Client name" value={name} onChange={e=>setName(e.target.value)} />
+        <button className="bg-blue-600 text-white px-4 py-2 rounded">Add</button>
+      </form>
+      {loading ? <p>Loading...</p> : (
+        <ul className="space-y-2">
+          {clients.map(c => <li key={c.id} className="border rounded p-3">{c.name} <span className="text-gray-500 text-sm">{c.email}</span></li>)}
+          {clients.length === 0 && <li className="text-gray-500">No clients yet.</li>}
+        </ul>
+      )}
     </div>
   );
 }
