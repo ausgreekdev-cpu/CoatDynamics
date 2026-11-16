@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function calcPaint(area: number, coverage: number, coats: number) {
+export function calcPaint(area: number, coverage: number, coats: number) {
   return (area * coats) / coverage;
 }
 

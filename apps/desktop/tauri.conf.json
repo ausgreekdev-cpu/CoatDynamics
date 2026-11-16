@@ -1,0 +1,6 @@
+{
+  "productName": "Painter SaaS",
+  "version": "0.1.0",
+  "identifier": "com.painter.saas",
+  "build": { "frontendDist": "../web/dist" }
+}
