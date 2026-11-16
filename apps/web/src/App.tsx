@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { supabase } from './lib/supabase'
-import { useAuth } from './auth/AuthProvider'
+import { useAuth, RoleGuard } from './auth/AuthProvider'
 import Login from './pages/Login'
 import SuperAdmin from './pages/SuperAdmin'
 import Onboarding from './pages/Onboarding'
@@ -14,7 +14,7 @@ import SurfaceEstimator from './pages/SurfaceEstimator'
 import './App.css'
 
 function App() {
-  const { session, loading } = useAuth();
+  const { session, loading, role } = useAuth();
   const [view, setView] = useState('admin');
   if (loading) return <div className="p-6">Loading...</div>;
   if (!session) return <Login />;
@@ -28,15 +28,16 @@ function App() {
         {tabs.map(([k,l]) => (
           <button key={k} onClick={() => setView(k)} className={`px-3 py-1 rounded border ${view===k?'bg-blue-600 text-white':'bg-white'}`}>{l}</button>
         ))}
+        <span className="text-sm text-gray-500">Role: {role}</span>
         <button onClick={() => supabase.auth.signOut()} className="ml-auto text-red-600">Sign out</button>
       </nav>
-      {view==='admin'&&<SuperAdmin/>}
+      {view==='admin'&&<RoleGuard allow={['super_admin','tenant_owner','admin']}><SuperAdmin/></RoleGuard>}
       {view==='onboard'&&<Onboarding/>}
       {view==='crm'&&<Crm/>}
       {view==='ops'&&<Operations/>}
       {view==='inv'&&<Inventory/>}
       {view==='comp'&&<Compliance/>}
-      {view==='fin'&&<Financials/>}
+      {view==='fin'&&<RoleGuard allow={['super_admin','tenant_owner','admin','accountant']}><Financials/></RoleGuard>}
       {view==='hub'&&<PublicHub/>}
       {view==='est'&&<SurfaceEstimator/>}
     </div>
