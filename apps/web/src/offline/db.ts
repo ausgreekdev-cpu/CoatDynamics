@@ -39,8 +39,3 @@ export async function flushQueue(handler: (m: QueuedMutation) => Promise<void>) 
     }
   }
 }
-EOF
-# place in packages/core? keep in web src/offline
-mkdir -p src/offline && mv /home/aiuser/painter-saas/apps/web/src/offline/db.ts /home/aiuser/painter-saas/apps/web/src/offline/db.ts 2>/dev/null
-cp /home/aiuser/painter-saas/apps/web/src/offline/db.ts /tmp/scratchpad/db.ts 2>/dev/null
-echo ok
