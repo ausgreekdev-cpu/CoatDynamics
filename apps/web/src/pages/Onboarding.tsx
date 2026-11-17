@@ -7,13 +7,24 @@ export default function Onboarding() {
   const [msg, setMsg] = useState('');
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { data: existing } = await supabase.from('tenants').select('id').eq('slug', slug).maybeSingle();
-    if (existing) { setMsg('Slug already taken'); return; }
-    const { data: t, error } = await supabase.from('tenants').insert({ name, slug }).select().single();
-    if (error) { setMsg(error.message); return; }
     const { data: u } = await supabase.auth.getUser();
-    if (u.user) await supabase.from('profiles').upsert({ id: u.user.id, tenant_id: t.id, role: 'tenant_owner', full_name: name });
-    setMsg('Tenant created: ' + t.id);
+    if (!u.user) { setMsg('Not signed in'); return; }
+
+    const tenantId = crypto.randomUUID();
+    const { error } = await supabase.from('tenants').insert({ id: tenantId, name, slug });
+    if (error) { setMsg(error.message); return; }
+
+    const { error: perr } = await supabase.from('profiles').upsert({
+      id: u.user.id,
+      tenant_id: tenantId,
+      role: 'tenant_owner',
+      full_name: name,
+    });
+    if (perr) { setMsg(perr.message); return; }
+
+    await supabase.auth.refreshSession();
+    setMsg('Tenant created. Reloading...');
+    setTimeout(() => window.location.reload(), 500);
   };
   return (
     <div className="p-6 max-w-md mx-auto">

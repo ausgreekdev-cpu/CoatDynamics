@@ -7,3 +7,6 @@ create policy "users update own profile" on profiles
   for update using (id = auth.uid());
 create policy "tenant admins insert profiles" on profiles
   for insert with check (tenant_id = (auth.jwt() ->> 'tenant_id')::uuid);
+-- A brand-new user has no tenant claim yet; allow them to create their own profile.
+create policy "users insert own profile" on profiles
+  for insert with check (id = auth.uid());
