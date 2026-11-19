@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { Card } from '@painter/ui';
+import { formatCurrency } from '@painter/core';
 
 export default function SuperAdmin() {
   const [tenants, setTenants] = useState<any[]>([]);
@@ -24,9 +26,9 @@ export default function SuperAdmin() {
         ))}
       </ul>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-        <div className="p-4 border rounded-lg">Tenants: {tenants.length}</div>
-        <div className="p-4 border rounded-lg">MRR: $0</div>
-        <div className="p-4 border rounded-lg">Active Subs: 0</div>
+        <Card>Tenants: {tenants.length}</Card>
+        <Card>MRR: {formatCurrency(0)}</Card>
+        <Card>Active Subs: 0</Card>
       </div>
     </div>
   );
