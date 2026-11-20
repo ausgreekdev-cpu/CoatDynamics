@@ -20,18 +20,3 @@ export default function SignaturePadPage() {
     </div>
   );
 }
-EOF
-# wire tab
-python3 - <<'PY'
-p='src/App.tsx'
-s=open(p).read()
-if "import SignaturePadPage" not in s:
-    s=s.replace("import CrewChat from './pages/CrewChat'","import CrewChat from './pages/CrewChat'\nimport SignaturePadPage from './pages/SignaturePad'")
-if "['sig','Signature']" not in s:
-    s=s.replace("['chat','Crew Chat'],","['chat','Crew Chat'],['sig','Signature'],")
-if "view==='sig'" not in s:
-    s=s.replace("{view==='chat'&&<CrewChat/>}","{view==='chat'&&<CrewChat/>}\n      {view==='sig'&&<SignaturePadPage/>}")
-open(p,'w').write(s)
-print('done')
-PY
-pnpm build 2>&1 | tail -3
