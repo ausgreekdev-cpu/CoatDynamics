@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { supabase } from './lib/supabase'
+import { useTranslation } from 'react-i18next'
 import { useAuth, RoleGuard } from './auth/AuthProvider'
 import Login from './pages/Login'
 import SuperAdmin from './pages/SuperAdmin'
@@ -22,6 +23,7 @@ import './App.css'
 
 function App() {
   const { session, loading, role } = useAuth();
+  const { i18n } = useTranslation();
   const [view, setView] = useState('admin');
   if (loading) return <div className="p-6">Loading...</div>;
   if (!session) return <Login />;
@@ -36,6 +38,10 @@ function App() {
           <button key={k} onClick={() => setView(k)} className={`px-3 py-1 rounded border ${view===k?'bg-blue-600 text-white':'bg-white'}`}>{l}</button>
         ))}
         <span className="text-sm text-gray-500">Role: {role}</span>
+        <select value={i18n.language} onChange={e=>{i18n.changeLanguage(e.target.value);localStorage.setItem('lang',e.target.value);}} className="border rounded px-2 py-1 text-sm">
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+        </select>
         <button onClick={() => supabase.auth.signOut()} className="ml-auto text-red-600">Sign out</button>
       </nav>
       {view==='admin'&&<RoleGuard allow={['super_admin','tenant_owner','admin']}><SuperAdmin/></RoleGuard>}
