@@ -13,6 +13,12 @@ export default function Compliance() {
   const swms = useTenantTable('swms');
   return (
     <div className="p-6">
+      <div className="grid grid-cols-4 gap-3 mb-6">
+        <div className="border rounded p-3">Total: {licenses.rows.length}</div>
+        <div className="border rounded p-3 bg-red-100">≤30d: {licenses.rows.filter((l:any)=>{const d=(new Date(l.expires_on).getTime()-Date.now())/86400000;return d<=30;}).length}</div>
+        <div className="border rounded p-3 bg-yellow-100">≤60d: {licenses.rows.filter((l:any)=>{const d=(new Date(l.expires_on).getTime()-Date.now())/86400000;return d>30&&d<=60;}).length}</div>
+        <div className="border rounded p-3 bg-green-100">≤90d: {licenses.rows.filter((l:any)=>{const d=(new Date(l.expires_on).getTime()-Date.now())/86400000;return d>60&&d<=90;}).length}</div>
+      </div>
       <h1 className="text-2xl font-bold mb-4">Compliance</h1>
       <section className="mb-6">
         <h2 className="font-semibold">MSDS Library</h2>

@@ -13,6 +13,7 @@ import PublicHub from './pages/PublicHub'
 import SurfaceEstimator from './pages/SurfaceEstimator'
 import CrewChat from './pages/CrewChat'
 import SignaturePadPage from './pages/SignaturePad'
+import TravelTracker from './pages/TravelTracker'
 import BarcodeScanner from './pages/BarcodeScanner'
 import MsdsViewer from './pages/MsdsViewer'
 import './App.css'
@@ -24,7 +25,7 @@ function App() {
   if (!session) return <Login />;
   const tabs = [
     ['admin','Super-Admin'],['onboard','Onboarding'],['crm','CRM'],['ops','Operations'],
-    ['inv','Inventory'],['comp','Compliance'],['fin','Financials'],['hub','Public Hub'],['est','Estimator'],['chat','Crew Chat'],['sig','Signature'],['scan','Barcode'],['msds','MSDS'],
+    ['inv','Inventory'],['comp','Compliance'],['fin','Financials'],['hub','Public Hub'],['est','Estimator'],['chat','Crew Chat'],['sig','Signature'],['travel','Travel'],['scan','Barcode'],['msds','MSDS'],
   ];
   return (
     <div>
@@ -46,6 +47,7 @@ function App() {
       {view==='est'&&<SurfaceEstimator/>}
       {view==='chat'&&<CrewChat/>}
       {view==='sig'&&<SignaturePadPage/>}
+      {view==='travel'&&<TravelTracker/>}
       {view==='scan'&&<BarcodeScanner/>}
       {view==='msds'&&<MsdsViewer/>}
     </div>
