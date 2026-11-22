@@ -15,5 +15,3 @@ i18n.use(initReactI18next).init({
 
 export default i18n;
 EOF
-# check main.tsx import
-grep -n "i18n" /home/aiuser/painter-saas/apps/web/src/main.tsx
