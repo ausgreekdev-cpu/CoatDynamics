@@ -20,6 +20,7 @@ import QuoteTemplates from './pages/QuoteTemplates'
 import WeatherScheduling from './pages/WeatherScheduling'
 import VoiceNotes from './pages/VoiceNotes'
 import PhotoGeotagging from './pages/PhotoGeotagging'
+import EquipmentMaintenance from './pages/EquipmentMaintenance'
 import BarcodeScanner from './pages/BarcodeScanner'
 import MsdsViewer from './pages/MsdsViewer'
 import PortalPage from './pages/PortalPage'
@@ -35,7 +36,7 @@ function App() {
   if (!session) return <Login />;
   const tabs = [
     ['admin','Super-Admin'],['onboard','Onboarding'],['crm','CRM'],['ops','Operations'],
-    ['inv','Inventory'],['comp','Compliance'],['fin','Financials'],['hub','Public Hub'],['est','Estimator'],['chat','Crew Chat'],['sig','Signature'],['travel','Travel'],['mix','Paint Mix'],['templates','Templates'],['weather','Weather'],['voice','Voice Notes'],['photos','Photos'],['scan','Barcode'],['msds','MSDS'],
+    ['inv','Inventory'],['comp','Compliance'],['fin','Financials'],['hub','Public Hub'],['est','Estimator'],['chat','Crew Chat'],['sig','Signature'],['travel','Travel'],['mix','Paint Mix'],['templates','Templates'],['weather','Weather'],['voice','Voice Notes'],['photos','Photos'],['equip','Equipment'],['scan','Barcode'],['msds','MSDS'],
   ];
   return (
     <div>
@@ -67,6 +68,7 @@ function App() {
       {view==='weather'&&<WeatherScheduling/>}
       {view==='voice'&&<VoiceNotes/>}
       {view==='photos'&&<PhotoGeotagging/>}
+      {view==='equip'&&<EquipmentMaintenance/>}
       {view==='scan'&&<BarcodeScanner/>}
       {view==='msds'&&<MsdsViewer/>}
     </div>
