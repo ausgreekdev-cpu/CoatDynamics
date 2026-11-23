@@ -18,6 +18,7 @@ import TravelTracker from './pages/TravelTracker'
 import PaintMixingCalculator from './pages/PaintMixingCalculator'
 import QuoteTemplates from './pages/QuoteTemplates'
 import WeatherScheduling from './pages/WeatherScheduling'
+import VoiceNotes from './pages/VoiceNotes'
 import BarcodeScanner from './pages/BarcodeScanner'
 import MsdsViewer from './pages/MsdsViewer'
 import PortalPage from './pages/PortalPage'
@@ -33,7 +34,7 @@ function App() {
   if (!session) return <Login />;
   const tabs = [
     ['admin','Super-Admin'],['onboard','Onboarding'],['crm','CRM'],['ops','Operations'],
-    ['inv','Inventory'],['comp','Compliance'],['fin','Financials'],['hub','Public Hub'],['est','Estimator'],['chat','Crew Chat'],['sig','Signature'],['travel','Travel'],['mix','Paint Mix'],['templates','Templates'],['weather','Weather'],['scan','Barcode'],['msds','MSDS'],
+    ['inv','Inventory'],['comp','Compliance'],['fin','Financials'],['hub','Public Hub'],['est','Estimator'],['chat','Crew Chat'],['sig','Signature'],['travel','Travel'],['mix','Paint Mix'],['templates','Templates'],['weather','Weather'],['voice','Voice Notes'],['scan','Barcode'],['msds','MSDS'],
   ];
   return (
     <div>
@@ -63,6 +64,7 @@ function App() {
       {view==='mix'&&<PaintMixingCalculator/>}
       {view==='templates'&&<QuoteTemplates/>}
       {view==='weather'&&<WeatherScheduling/>}
+      {view==='voice'&&<VoiceNotes/>}
       {view==='scan'&&<BarcodeScanner/>}
       {view==='msds'&&<MsdsViewer/>}
     </div>
