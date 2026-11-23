@@ -42,4 +42,4 @@ export default function Operations() {
   );
 }
 EOF
-pnpm build 2>&1 | tail -3 && cd /home/aiuser/painter-saas && git add -A && git commit -m "feat: drag-and-drop kanban (dnd-kit)" 2>&1 | tail -2
+pnpm build 2>&1 | tail -3
