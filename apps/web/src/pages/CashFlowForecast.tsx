@@ -29,17 +29,3 @@ export default function CashFlowForecast() {
     </div>
   );
 }
-EOF
-python3 - <<'PY'
-p='src/App.tsx'
-s=open(p).read()
-if "import CashFlowForecast" not in s:
-    s=s.replace("import SubcontractorScorecard from './pages/SubcontractorScorecard'","import SubcontractorScorecard from './pages/SubcontractorScorecard'\nimport CashFlowForecast from './pages/CashFlowForecast'")
-if "['cashflow','Cash Flow']" not in s:
-    s=s.replace("['scorecard','Scorecard'],","['scorecard','Scorecard'],['cashflow','Cash Flow'],")
-if "view==='cashflow'" not in s:
-    s=s.replace("{view==='scorecard'&&<SubcontractorScorecard/>}","{view==='scorecard'&&<SubcontractorScorecard/>}\n      {view==='cashflow'&&<CashFlowForecast/>}")
-open(p,'w').write(s)
-print('done')
-PY
-pnpm build 2>&1 | tail -3 && cd /home/aiuser/painter-saas && git add -A && git commit -m "feat: cash-flow forecast" 2>&1 | tail -2
