@@ -20,12 +20,15 @@ import QuoteTemplates from './pages/QuoteTemplates'
 import WeatherScheduling from './pages/WeatherScheduling'
 import BarcodeScanner from './pages/BarcodeScanner'
 import MsdsViewer from './pages/MsdsViewer'
+import PortalPage from './pages/PortalPage'
 import './App.css'
 
 function App() {
   const { session, loading, role } = useAuth();
   const { i18n } = useTranslation();
   const [view, setView] = useState('admin');
+  const portalMatch = window.location.pathname.match(/^\/portal\/([^/]+)/);
+  if (portalMatch) return <PortalPage token={portalMatch[1]} />;
   if (loading) return <div className="p-6">Loading...</div>;
   if (!session) return <Login />;
   const tabs = [
