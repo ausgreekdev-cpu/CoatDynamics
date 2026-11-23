@@ -24,6 +24,7 @@ import EquipmentMaintenance from './pages/EquipmentMaintenance'
 import SubcontractorScorecard from './pages/SubcontractorScorecard'
 import CashFlowForecast from './pages/CashFlowForecast'
 import GanttChart from './pages/GanttChart'
+import BlueprintAnnotator from './pages/BlueprintAnnotator'
 import BarcodeScanner from './pages/BarcodeScanner'
 import MsdsViewer from './pages/MsdsViewer'
 import PortalPage from './pages/PortalPage'
@@ -39,7 +40,7 @@ function App() {
   if (!session) return <Login />;
   const tabs = [
     ['admin','Super-Admin'],['onboard','Onboarding'],['crm','CRM'],['ops','Operations'],
-    ['inv','Inventory'],['comp','Compliance'],['fin','Financials'],['hub','Public Hub'],['est','Estimator'],['chat','Crew Chat'],['sig','Signature'],['travel','Travel'],['mix','Paint Mix'],['templates','Templates'],['weather','Weather'],['voice','Voice Notes'],['photos','Photos'],['equip','Equipment'],['scorecard','Scorecard'],['cashflow','Cash Flow'],['gantt','Gantt'],['scan','Barcode'],['msds','MSDS'],
+    ['inv','Inventory'],['comp','Compliance'],['fin','Financials'],['hub','Public Hub'],['est','Estimator'],['chat','Crew Chat'],['sig','Signature'],['travel','Travel'],['mix','Paint Mix'],['templates','Templates'],['weather','Weather'],['voice','Voice Notes'],['photos','Photos'],['equip','Equipment'],['scorecard','Scorecard'],['cashflow','Cash Flow'],['gantt','Gantt'],['blueprint','Blueprint'],['scan','Barcode'],['msds','MSDS'],
   ];
   return (
     <div>
@@ -75,6 +76,7 @@ function App() {
       {view==='scorecard'&&<SubcontractorScorecard/>}
       {view==='cashflow'&&<CashFlowForecast/>}
       {view==='gantt'&&<GanttChart/>}
+      {view==='blueprint'&&<BlueprintAnnotator/>}
       {view==='scan'&&<BarcodeScanner/>}
       {view==='msds'&&<MsdsViewer/>}
     </div>
