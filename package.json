@@ -8,7 +8,9 @@
     "build": "pnpm -r build",
     "lint": "pnpm --filter web exec eslint src",
     "build:mobile": "pnpm --filter web build && pnpm --filter mobile exec cap sync",
-    "test": "pnpm --filter web exec vitest run"
+    "test": "pnpm --filter web exec vitest run",
+    "build:desktop": "cd apps/desktop && cargo tauri build",
+    "typecheck": "pnpm --filter web exec tsc -b"
   },
   "workspaces": [
     "apps/*",
