@@ -1,13 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTravel } from '../hooks/useTravel';
-
-function haversine(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
-  const R = 6371;
-  const dLat = (b.lat - a.lat) * Math.PI / 180;
-  const dLng = (b.lng - a.lng) * Math.PI / 180;
-  const x = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * Math.PI / 180) * Math.cos(b.lat * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
-  return 2 * R * Math.asin(Math.sqrt(x));
-}
+import { haversine } from '../utils/distance';
 
 export default function TravelTracker() {
   const { entries, loading, start, stop } = useTravel();
