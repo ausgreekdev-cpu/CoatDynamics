@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useJobs } from '../hooks/useJobs';
 import { useJobNotes } from '../hooks/useJobNotes';
 

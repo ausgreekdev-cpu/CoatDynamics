@@ -4,9 +4,8 @@ import { useEquipment } from '../hooks/useEquipment';
 export default function EquipmentMaintenance() {
   const { items, logs, loading, addEquipment, logService, addHours } = useEquipment();
   const [name, setName] = useState('');
-  const [sel, setSel] = useState('');
-  const [note, setNote] = useState('');
-  const [hrs, setHrs] = useState(1);
+  const [note] = useState('');
+  const [hrs] = useState(1);
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Equipment Maintenance Log</h1>

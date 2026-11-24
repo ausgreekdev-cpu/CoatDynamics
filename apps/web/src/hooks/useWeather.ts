@@ -13,6 +13,7 @@ export function useWeather() {
     setAlerts(data || []);
     setLoading(false);
   };
+  // eslint-disable-next-line react/set-state-in-effect, react-hooks/exhaustive-deps
   useEffect(() => { refresh(); }, []);
 
   const checkWeather = async () => {

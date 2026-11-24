@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useBlueprints } from '../hooks/useBlueprints';
 
 export default function BlueprintAnnotator() {
   const { rows, loading, add } = useBlueprints();
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imgRef = useRef<HTMLImageElement>(null);
   const [title, setTitle] = useState('');
   const [drawing, setDrawing] = useState(false);
   const [imageData, setImageData] = useState('');

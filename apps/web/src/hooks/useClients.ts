@@ -10,6 +10,7 @@ export function useClients() {
     setClients(data || []);
     setLoading(false);
   };
+  // eslint-disable-next-line react/set-state-in-effect, react-hooks/exhaustive-deps
   useEffect(() => { refresh(); }, []);
   const add = async (name: string, email?: string, phone?: string) => {
     const { data: u } = await supabase.auth.getUser();

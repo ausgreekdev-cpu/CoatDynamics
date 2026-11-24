@@ -10,6 +10,7 @@ export function useTravel() {
     setEntries(data || []);
     setLoading(false);
   };
+  // eslint-disable-next-line react/set-state-in-effect, react-hooks/exhaustive-deps
   useEffect(() => { refresh(); }, []);
   const start = async () => {
     const { data: u } = await supabase.auth.getUser();

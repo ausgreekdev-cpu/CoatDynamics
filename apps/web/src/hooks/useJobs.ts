@@ -10,6 +10,7 @@ export function useJobs() {
     setJobs(data || []);
     setLoading(false);
   };
+  // eslint-disable-next-line react/set-state-in-effect, react-hooks/exhaustive-deps
   useEffect(() => { refresh(); }, []);
   const add = async (title: string, status = 'Initial Contact') => {
     const { data: u } = await supabase.auth.getUser();

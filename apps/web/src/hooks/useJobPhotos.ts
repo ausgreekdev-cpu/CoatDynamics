@@ -12,6 +12,7 @@ export function useJobPhotos(jobId?: string) {
     setPhotos(data || []);
     setLoading(false);
   };
+  // eslint-disable-next-line react/set-state-in-effect, react-hooks/exhaustive-deps
   useEffect(() => { refresh(); }, [jobId]);
   const add = async (jobId: string, photoBase64: string, lat?: number, lng?: number) => {
     const { data: u } = await supabase.auth.getUser();

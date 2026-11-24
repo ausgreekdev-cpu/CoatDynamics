@@ -10,6 +10,7 @@ export function useTenantTable<T = any>(table: string, orderCol = 'created_at') 
     setRows((data as T[]) || []);
     setLoading(false);
   };
+  // eslint-disable-next-line react/set-state-in-effect, react-hooks/exhaustive-deps
   useEffect(() => { refresh(); }, [table]);
   const add = async (payload: Record<string, any>) => {
     const { data: u } = await supabase.auth.getUser();

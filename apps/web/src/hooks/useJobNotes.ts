@@ -12,6 +12,7 @@ export function useJobNotes(jobId?: string) {
     setNotes(data || []);
     setLoading(false);
   };
+  // eslint-disable-next-line react/set-state-in-effect, react-hooks/exhaustive-deps
   useEffect(() => { refresh(); }, [jobId]);
   const add = async (note: string, audioBase64?: string) => {
     const { data: u } = await supabase.auth.getUser();

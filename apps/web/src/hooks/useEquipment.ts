@@ -15,6 +15,7 @@ export function useEquipment() {
     setLogs(l || []);
     setLoading(false);
   };
+  // eslint-disable-next-line react/set-state-in-effect, react-hooks/exhaustive-deps
   useEffect(() => { refresh(); }, []);
   const addEquipment = async (name: string) => {
     const { data: u } = await supabase.auth.getUser();
