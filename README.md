@@ -1,13 +1,13 @@
-# Painter Contracting SaaS
+# CoatDynamics
 
-Multi-tenant B2B SaaS for painting enterprises. See plan in `~/.opencode/plan/painter-saas-architecture.md`.
+Multi-tenant B2B SaaS for painting enterprises (Painter Contracting SaaS).
 
 ## Structure
 - `apps/web` — Vite + React + Tailwind PWA
-- `apps/mobile` — Capacitor wrapper (TODO)
-- `apps/desktop` — Tauri wrapper (TODO)
-- `packages/*` — shared libs (TODO)
-- `supabase/` — DB migrations & edge functions (TODO)
+- `apps/mobile` — Capacitor wrapper
+- `apps/desktop` — Tauri wrapper
+- `packages/*` — shared libs
+- `supabase/` — DB migrations & edge functions
 
 ## Dev
 ```
